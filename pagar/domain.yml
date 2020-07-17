@@ -1,0 +1,56 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- hola
+- adios
+- pagar
+- fuera
+- cancelar
+- pedir_tarjeta
+- pedir_cvc
+- pedir_mesaaaa
+- pedir_referencia
+entities:
+- tarjeta
+- referencia
+- cvc
+- mesaaaa
+- organismo
+slots:
+  cvc:
+    type: text
+  mesaaaa:
+    type: text
+  organismo:
+    type: text
+  referencia:
+    type: text
+  tarjeta:
+    type: text
+responses:
+  utter_saludar:
+  - text: hola, para pagar escribe pagar
+  utter_no_entiendo:
+  - text: No te entiendo
+  utter_pedir_referencia:
+  - text: Dame la referencia de cobro. Por ejemplo 123222111212 (diez digitos
+  utter_pedir_tarjeta:
+  - text: Dame el numero tarjeta de credito. Por ejemplo 1234 2232 2232 3322
+  utter_pedir_mesaaaa:
+  - text: dame el mes y el año de caducidad. ejemplo (noviembre año 2022) 1122
+  utter_pedir_cvc:
+  - text: Dame el cvc de la tarjeta. Por ejemplo 123
+  utter_procedemos_al_pago:
+  - text: recibo pagado correctamente
+actions:
+- utter_saludar
+- utter_no_entiendo
+- utter_pedir_referencia
+- utter_pedir_tarjeta
+- utter_pedir_mesaaaa
+- utter_pedir_cvc
+- utter_procedemos_al_pago
+- action_hello_world
+- action_borrar
+- action_session_start

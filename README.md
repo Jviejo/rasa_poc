@@ -4,6 +4,14 @@
 virtualenv -p /usr/bin/python3.7 p37
 ## para activar el entorno 
 source ./p37/bin/activate
+## para desactivar el entorno 
+deactivate
+## si nos queremos asegurar la version de python despues de activar
+python --version
+## no debde de dar Python 3.8.2 si hemos creado un entorno con 3.8
+## antes de crear el entorno virtual debemos de tener instalado la version de python deseada
+## url para ver las versiones y con el siguiente comando se instala
+sudo apt install python3.6
 
 # instalacion de rasa
 https://rasa.com/docs/rasa/user-guide/installation/

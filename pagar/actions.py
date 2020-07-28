@@ -43,18 +43,18 @@ class PagarForm(FormAction):
          if  (len(value) == 12):
              return {"referencia": value}
          else:
-	     dispatcher.utter_message(template="utter_wrong_referencia")	
+             dispatcher.utter_message(template="utter_wrong_referencia")
              return {"referencia": None}
 
      def validate_tarjeta(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
          if  (len(value) == 16):
              return {"tarjeta": value}
          else:
-	     dispatcher.utter_message(template="utter_wrong_referencia")	
+             dispatcher.utter_message(template="utter_wrong_tarjeta")
              return {"tarjeta": None}
 
      def meses_db() -> List[Text]:
-	return ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+         return ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
      def años_db() -> List[Text]:
         return ["20", "21", "22", "23", "24", "25"]
@@ -63,5 +63,5 @@ class PagarForm(FormAction):
          if  (len(value) == 4 and value[0:2] in meses_db() and value[2:4] in años_db()):
              return {"mmaa": value}
          else:
-	     dispatcher.utter_message(template="utter_wrong_referencia")	
-             return {"mmaa": None}
+              dispatcher.utter_message(template="utter_wrong_mmaa")
+              return {"mmaa": None}

@@ -39,3 +39,23 @@ class PagarForm(FormAction):
              # user will be asked for the slot again
              return {"cvv": None}
 
+     def validate_referencia(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
+         if  (len(value) == 12):
+             return {"referencia": value}
+         else:
+	     dispatcher.utter_message(template="utter_wrong_referencia")	
+             return {"referencia": None}
+
+     def validate_tarjeta(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
+         if  (len(value) == 16):
+             return {"tarjeta": value}
+         else:
+	     dispatcher.utter_message(template="utter_wrong_referencia")	
+             return {"tarjeta": None}
+
+     def validate_mmaa(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
+         if  (len(value) == 4):
+             return {"mmaa": value}
+         else:
+	     dispatcher.utter_message(template="utter_wrong_referencia")	
+             return {"mmaa": None}

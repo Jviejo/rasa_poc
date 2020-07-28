@@ -1,6 +1,12 @@
-## happy path
+>> activate pagar form
 * pagar
   - pagar_form
   - form{"name": "pagar_form"}
-  - form{"name": null}
-  - utter_slots_values
+   
+>> submit pagar form
+   - form{"name": "pagar_form"}
+   - ...
+   - pagar_form
+   - form{"name": null}
+   - utter_submit
+   - utter_slots_values

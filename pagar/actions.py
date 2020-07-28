@@ -53,14 +53,16 @@ class PagarForm(FormAction):
              dispatcher.utter_message(template="utter_wrong_tarjeta")
              return {"tarjeta": None}
 
+     @staticmethod
      def meses_db() -> List[Text]:
          return ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-
+     
+     @staticmethod
      def años_db() -> List[Text]:
         return ["20", "21", "22", "23", "24", "25"]
 
      def validate_mmaa(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
-         if  (len(value) == 4 and value[0:2] in meses_db() and value[2:4] in años_db()):
+         if  (len(value) == 4 and value[0:2] in self.meses_db() and value[2:4] in self.años_db()):
              return {"mmaa": value}
          else:
               dispatcher.utter_message(template="utter_wrong_mmaa")

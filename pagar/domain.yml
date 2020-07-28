@@ -1,7 +1,11 @@
 intents:
 - pagar
 - cancelar
-- inform
+- inform_referencia
+- inform_tarjeta
+- inform_cvv
+- inform_mmaa
+
 
 entities:
 - referencia
@@ -27,39 +31,38 @@ slots:
 
 forms:
 - pagar_form
-
-templates:
-  utter_happy:
+  
+responses:
+  utter_submit:
   - text: "Se ha pagado el recibo!"
+
   utter_ask_referencia:
   - text: "Entre el número de referencia del recibo:"
+
   utter_ask_tarjeta:
   - text: "Entre el número de la tarjeta bancaria:"
+
   utter_ask_cvv:
   - text: "Entre el código de seguridad de la tarjeta bancaria:"
+
   utter_ask_mmaa:
   - text: "Entre la fecha de caducidad-->"
+
   utter_wrong_cvv:
   - text: "Parámetro CVV incorrecto!"
+
   utter_slots_values:
   - text: "Usted va a pagar el recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"
-  utter_submit:
-  -  text: "Recibo pagado!"
+
   utter_wrong_referencia:
   - text: "Parámetro Referencia incorrecto!"
+
   utter_wrong_tarjeta:
   - text: "Parámetro Número de Tarjeta incorrecto!"
+
   utter_wrong_mmaa:
   - text: "Parámetro Fecha de Vencimiento incorrecto!"
-actions:
-- utter_happy
-- utter_ask_referencia
-- utter_ask_tarjeta
-- utter_ask_cvv
-- utter_ask_mmaa
-- utter_slots_values
-- utter_submit
-- utter_wrong_cvv
-- utter_wrong_referencia
-- utter_wrong_tarjeta
-- utter_wrong_mmaa
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

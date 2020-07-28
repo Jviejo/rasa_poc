@@ -48,20 +48,12 @@ responses:
   utter_ask_mmaa:
   - text: "Entre la fecha de caducidad-->"
 
-  utter_wrong_cvv:
-  - text: "Parámetro CVV incorrecto!"
+  utter_wrong:
+  - text: "Parámetro incorrecto!"
 
   utter_slots_values:
   - text: "Usted va a pagar el recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"
 
-  utter_wrong_referencia:
-  - text: "Parámetro Referencia incorrecto!"
-
-  utter_wrong_tarjeta:
-  - text: "Parámetro Número de Tarjeta incorrecto!"
-
-  utter_wrong_mmaa:
-  - text: "Parámetro Fecha de Vencimiento incorrecto!"
 
 session_config:
   session_expiration_time: 60

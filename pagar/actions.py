@@ -34,7 +34,7 @@ class PagarForm(FormAction):
              # validation succeeded, set the value of the "cvv" slot to value
              return {"cvv": value}
          else:
-             dispatcher.utter_message(template="utter_wrong_cvv")
+             dispatcher.utter_message(template="utter_wrong")
              # validation failed, set this slot to None, meaning the
              # user will be asked for the slot again
              return {"cvv": None}
@@ -43,14 +43,14 @@ class PagarForm(FormAction):
          if  (len(value) == 12):
              return {"referencia": value}
          else:
-             dispatcher.utter_message(template="utter_wrong_referencia")
+             dispatcher.utter_message(template="utter_wrong")
              return {"referencia": None}
 
      def validate_tarjeta(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
          if  (len(value) == 16):
              return {"tarjeta": value}
          else:
-             dispatcher.utter_message(template="utter_wrong_tarjeta")
+             dispatcher.utter_message(template="utter_wrong")
              return {"tarjeta": None}
 
      @staticmethod
@@ -65,5 +65,5 @@ class PagarForm(FormAction):
          if  (len(value) == 4 and value[0:2] in self.meses_db() and value[2:4] in self.años_db()):
              return {"mmaa": value}
          else:
-              dispatcher.utter_message(template="utter_wrong_mmaa")
+              dispatcher.utter_message(template="utter_wrong")
               return {"mmaa": None}

@@ -1,419 +1,89 @@
-## regex:cvc
-- [0-9]{3}
+## intent:pagar
+- quiero pagar 
+- quiero pagar recibo
+- pagar
+- pagar recibo
+- pagar recibo [0002415611](referencia)
+- pagar recibo [0012345678](referencia)
+- pagar recibo [9876554433](referencia)
+- pagar recibo [0009789697](referencia) con tarjeta [7169 9033 4370 1795](tarjeta)
+- pagar recibo [0002476789](referencia) con tarjeta [7169 9033 4370 1795](tarjeta)
+- pagar recibo [0002415567](referencia) con tarjeta [7169 9033 4370 1795](tarjeta)
+- pagar recibo [9876554433](referencia) con tarjeta [7169 9033 4370 1795](tarjeta)
+- pagar recibo [9876554433](referencia) con tarjeta [7169 9033 4370 1795](tarjeta) con código [739](cvv)
+- pagar recibo [9876554433](referencia) con tarjeta [7169 9033 4370 1795](tarjeta) con código [404](cvv)
+- pagar recibo [9876554433](referencia) con tarjeta [7169 9033 4370 1795](tarjeta) con código [865](cvv) 
+- pagar recibo [9876554433](referencia) con tarjeta [7169 9033 4370 1795](tarjeta) con código [739](cvv) y caducidad [1127](mmaa)
+- pagar recibo [9876554433](referencia) con tarjeta [7169 9033 4370 1795](tarjeta) con código [404](cvv) y caducidad [0120](mmaa)
+- pagar recibo [9876554433](referencia) con tarjeta [7169 9033 4370 1795](tarjeta) con código [865](cvv) y caducidad [1222](mmaa)
 
-## regex:mesaaaa
-- [0-9]{4}
+## intent:inform
+- [0012345678](referencia)
+- [0001234567](referencia)
+- [7169 9033 4370 1795](tarjeta)
+- [8765 4772 3335 2966](tarjeta)
+- [185](cvv)
+- [329](cvv)
+- [127](cvv)
+- [193](cvv)
+- [1100](mmaa)
+- [0422](mmaa)
+- [0945](mmaa)
+- [1221](mmaa)
+
+## intent:cancelar
+- cancelo
+- quiero cancelar
+- cancela
+
+## lookup:mmaa
+- 0120
+- 0220
+- 0321
+- 0422
+- 0523
+- 0626
+- 0720
+
+## lookup:cvv
+- 949
+- 533
+- 640
+- 444
+- 867
+- 866
+
+## lookup:referencia
+
+- 0002415611
+- 0007616398
+- 0002840971
+- 0013752379
+- 0015451613
+- 0008134842
+- 0017952591
+- 0014768005
+- 0012460715
+- 0018293470
+- 0018497996
+- 0013165722
+- 0012403796
+- 0007898072
+- 0014727904
+- 0012345678
+
+## lookup:tarjeta
+- 6894 5790 1276 7429
+- 1591 5198 1009 3527
+- 5807 3092 3097 1633
+- 6593 6294 7368 2126
+- 7181 8074 8031 5904
 
 ## regex:referencia
 - [0-9]{10}
 
-## regex:tarjeta
-- [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}
+## regex:cvv
+- [0-9]{3}
 
-## intent:fuera
-- no se
-- tampoco
-- cuando empieza el concierto
-
-## intent:cancelar
-- cancelar
-- borrar
-
-## intent:hola
-- hola
-- que tal
-- buenos dias
-- buenas tardes
-
-## intent:adios
-- adios
-
-## intent:pagar
-- quiero pagar
-- pagar
-
-## intent:pedir_referencia
-- [0002415611](referencia)
-- [0007616398](referencia)
-- [0002840971](referencia)
-- [0013752379](referencia)
-- [0015451613](referencia)
-- [0008134842](referencia)
-- [0017952591](referencia)
-- [0014768005](referencia)
-- [0012460715](referencia)
-- [0018293470](referencia)
-- [0018497996](referencia)
-- [0013165722](referencia)
-- [0012403796](referencia)
-- [0007898072](referencia)
-- [0014727904](referencia)
-- [0011716210](referencia)
-- [0018307978](referencia)
-- [0008903811](referencia)
-- [0013380084](referencia)
-- [0007513621](referencia)
-- [0006826335](referencia)
-- [0004597800](referencia)
-- [0000911771](referencia)
-- [0012841438](referencia)
-- [0013456118](referencia)
-- [0000568810](referencia)
-- [0018925440](referencia)
-- [0013576574](referencia)
-- [0000815669](referencia)
-- [0008809169](referencia)
-- [0011629614](referencia)
-- [0012919559](referencia)
-- [0006520012](referencia)
-- [0003649163](referencia)
-- [0010954301](referencia)
-- [0009880889](referencia)
-- [0016306623](referencia)
-- [0009855786](referencia)
-- [0006645885](referencia)
-- [0008596838](referencia)
-- [0015621703](referencia)
-- [0009123882](referencia)
-- [0016105905](referencia)
-- [0011153896](referencia)
-- [0005681435](referencia)
-- [0008900630](referencia)
-- [0017733209](referencia)
-- [0011963814](referencia)
-- [0014161861](referencia)
-- [0002454133](referencia)
-- [0003980004](referencia)
-- [0007749352](referencia)
-- [0010103767](referencia)
-- [0007986089](referencia)
-- [0019786941](referencia)
-- [0018337180](referencia)
-- [0017229409](referencia)
-- [0001223494](referencia)
-- [0007361596](referencia)
-- [0009452431](referencia)
-- [0018845688](referencia)
-- [0009850770](referencia)
-- [0012097717](referencia)
-- [0011657001](referencia)
-- [0003339371](referencia)
-- [0015268636](referencia)
-- [0019943737](referencia)
-- [0007508091](referencia)
-- [0001941304](referencia)
-- [0002443778](referencia)
-- [0013437228](referencia)
-- [0009195894](referencia)
-- [0005636707](referencia)
-- [0016954151](referencia)
-- [0007428767](referencia)
-- [0008692090](referencia)
-- [0019255024](referencia)
-- [0005151702](referencia)
-- [0014565158](referencia)
-- [0018481990](referencia)
-- [0009350349](referencia)
-- [0016403915](referencia)
-- [0004699794](referencia)
-- [0014479952](referencia)
-- [0001737327](referencia)
-
-## intent:pedir_tarjeta
-- [7169 9033 4370 1795](tarjeta)
-- [8765 4772 3335 2966](tarjeta)
-- [6894 5790 1276 7429](tarjeta)
-- [1591 5198 1009 3527](tarjeta)
-- [5807 3092 3097 1633](tarjeta)
-- [6593 6294 7368 2126](tarjeta)
-- [7181 8074 8031 5904](tarjeta)
-- [8041 8781 5789 4238](tarjeta)
-- [3267 1126 9584 6185](tarjeta)
-- [8772 9975 8257 7558](tarjeta)
-- [5789 1992 7479 8449](tarjeta)
-- [5391 3666 8378 5592](tarjeta)
-- [7474 1796 5513 1164](tarjeta)
-- [9262 4838 5461 1297](tarjeta)
-- [5697 3738 5824 3628](tarjeta)
-- [2051 5094 3016 2402](tarjeta)
-- [3347 4760 8872 2142](tarjeta)
-- [6685 7776 3859 9442](tarjeta)
-- [6728 2449 4279 8264](tarjeta)
-- [2304 4258 5776 8751](tarjeta)
-- [9299 8814 8759 3789](tarjeta)
-- [1966 9892 5681 2228](tarjeta)
-- [5472 2477 1250 6216](tarjeta)
-- [3995 3379 3597 1615](tarjeta)
-- [1289 7550 3486 5686](tarjeta)
-- [1767 6216 3159 9732](tarjeta)
-- [8940 5822 6809 1394](tarjeta)
-- [2520 1521 6119 1665](tarjeta)
-- [9956 8325 8077 3783](tarjeta)
-- [2884 9447 8473 3628](tarjeta)
-- [3842 5872 4542 5702](tarjeta)
-- [6911 2215 1326 6099](tarjeta)
-- [5006 2408 8722 7496](tarjeta)
-- [6614 4922 9708 5808](tarjeta)
-- [3198 8554 2110 3855](tarjeta)
-- [4498 1473 4830 5271](tarjeta)
-- [3099 2319 3276 5844](tarjeta)
-- [7179 1995 7284 3983](tarjeta)
-- [1694 3778 9287 9202](tarjeta)
-- [8497 5204 7518 3280](tarjeta)
-- [3309 1515 6159 7322](tarjeta)
-- [3700 1297 4328 2361](tarjeta)
-- [3651 1416 4587 5297](tarjeta)
-- [4021 9970 4865 1695](tarjeta)
-- [3505 8131 4821 7141](tarjeta)
-- [6857 3082 3808 1573](tarjeta)
-- [2129 5612 9305 8154](tarjeta)
-- [8316 5892 1330 9737](tarjeta)
-- [9563 6958 8541 6967](tarjeta)
-- [4606 4971 4625 7059](tarjeta)
-- [8692 5770 6601 6968](tarjeta)
-- [7561 1177 9576 5313](tarjeta)
-- [5405 4658 7182 1985](tarjeta)
-- [1470 6082 2153 1463](tarjeta)
-- [5784 7687 7216 2419](tarjeta)
-- [8758 8569 8546 8083](tarjeta)
-- [3806 8679 5940 4759](tarjeta)
-- [5735 6682 6655 9320](tarjeta)
-- [6448 7896 7743 8823](tarjeta)
-- [7459 7165 7963 6284](tarjeta)
-- [4376 2230 9760 2494](tarjeta)
-- [1072 5575 6631 5365](tarjeta)
-- [6726 7289 9390 1912](tarjeta)
-- [8758 1105 5903 1720](tarjeta)
-- [7020 9135 7817 7882](tarjeta)
-- [4818 1587 5879 4781](tarjeta)
-- [3898 7754 2431 4610](tarjeta)
-- [2466 2587 6953 7449](tarjeta)
-- [4389 2374 2692 2939](tarjeta)
-- [1299 7732 2803 7059](tarjeta)
-- [9607 3140 7408 6456](tarjeta)
-- [1444 6628 7587 6638](tarjeta)
-- [2870 6388 7068 1498](tarjeta)
-- [2068 3129 9669 8013](tarjeta)
-- [5571 3754 9269 5811](tarjeta)
-- [9412 2288 4673 9947](tarjeta)
-- [7304 5267 7952 7536](tarjeta)
-- [7456 7216 7194 7632](tarjeta)
-- [5129 2552 4877 8357](tarjeta)
-- [6018 2871 1409 6486](tarjeta)
-- [9926 4309 8861 9027](tarjeta)
-- [5596 5821 5774 3425](tarjeta)
-- [6206 4865 3052 3990](tarjeta)
-- [2772 6604 7623 7091](tarjeta)
-- [1634 1996 6450 1378](tarjeta)
-- [4393 8513 7671 7916](tarjeta)
-- [4968 7994 8346 8902](tarjeta)
-- [2916 2177 9550 6932](tarjeta)
-- [8227 7417 1159 6961](tarjeta)
-- [8583 2127 2616 7728](tarjeta)
-- [6615 8732 6876 7626](tarjeta)
-- [3957 8563 3677 7600](tarjeta)
-- [5637 2102 9173 3320](tarjeta)
-- [9673 9807 8372 3385](tarjeta)
-- [2726 1598 7982 8127](tarjeta)
-- [2623 5538 3285 3316](tarjeta)
-- [9975 8015 9080 2216](tarjeta)
-- [7113 7440 5678 5691](tarjeta)
-- [6601 5441 8734 3769](tarjeta)
-- [6642 3767 4849 3367](tarjeta)
-
-## intent:pedir_mesaaaa
-- [9871](mesaaaa)
-- [5661](mesaaaa)
-- [4133](mesaaaa)
-- [2700](mesaaaa)
-- [1098](mesaaaa)
-- [3790](mesaaaa)
-- [3841](mesaaaa)
-- [9756](mesaaaa)
-- [8332](mesaaaa)
-- [2979](mesaaaa)
-- [8796](mesaaaa)
-- [2799](mesaaaa)
-- [1895](mesaaaa)
-- [8985](mesaaaa)
-- [7605](mesaaaa)
-- [9745](mesaaaa)
-- [6167](mesaaaa)
-- [7345](mesaaaa)
-- [9425](mesaaaa)
-- [8071](mesaaaa)
-- [1080](mesaaaa)
-- [6185](mesaaaa)
-- [5147](mesaaaa)
-- [2850](mesaaaa)
-- [5266](mesaaaa)
-- [3128](mesaaaa)
-- [1784](mesaaaa)
-- [2508](mesaaaa)
-- [3184](mesaaaa)
-- [3403](mesaaaa)
-- [6702](mesaaaa)
-- [1217](mesaaaa)
-- [4524](mesaaaa)
-- [4981](mesaaaa)
-- [8918](mesaaaa)
-- [5054](mesaaaa)
-- [3869](mesaaaa)
-- [9824](mesaaaa)
-- [2184](mesaaaa)
-- [6518](mesaaaa)
-- [2634](mesaaaa)
-- [5694](mesaaaa)
-- [6218](mesaaaa)
-- [9472](mesaaaa)
-- [7936](mesaaaa)
-- [7540](mesaaaa)
-- [8457](mesaaaa)
-- [7243](mesaaaa)
-- [3175](mesaaaa)
-- [3925](mesaaaa)
-- [7589](mesaaaa)
-- [1864](mesaaaa)
-- [9848](mesaaaa)
-- [3710](mesaaaa)
-- [1085](mesaaaa)
-- [3081](mesaaaa)
-- [7352](mesaaaa)
-- [8485](mesaaaa)
-- [5630](mesaaaa)
-- [3721](mesaaaa)
-- [1196](mesaaaa)
-- [5390](mesaaaa)
-- [6195](mesaaaa)
-- [4565](mesaaaa)
-- [3269](mesaaaa)
-- [8805](mesaaaa)
-- [1591](mesaaaa)
-- [3874](mesaaaa)
-- [3330](mesaaaa)
-- [7164](mesaaaa)
-- [7712](mesaaaa)
-- [5659](mesaaaa)
-- [8721](mesaaaa)
-- [1792](mesaaaa)
-- [1940](mesaaaa)
-- [8236](mesaaaa)
-- [5177](mesaaaa)
-- [4507](mesaaaa)
-- [8247](mesaaaa)
-- [3049](mesaaaa)
-- [3460](mesaaaa)
-- [7826](mesaaaa)
-- [9840](mesaaaa)
-- [4273](mesaaaa)
-- [7855](mesaaaa)
-- [7012](mesaaaa)
-- [6578](mesaaaa)
-- [8289](mesaaaa)
-- [7426](mesaaaa)
-- [2499](mesaaaa)
-- [6116](mesaaaa)
-- [5555](mesaaaa)
-- [7311](mesaaaa)
-- [1163](mesaaaa)
-- [5526](mesaaaa)
-- [1805](mesaaaa)
-- [6069](mesaaaa)
-- [2551](mesaaaa)
-- [3891](mesaaaa)
-
-## intent:pedir_cvc
-- [739](cvc)
-- [404](cvc)
-- [865](cvc)
-- [185](cvc)
-- [329](cvc)
-- [127](cvc)
-- [193](cvc)
-- [949](cvc)
-- [533](cvc)
-- [640](cvc)
-- [444](cvc)
-- [867](cvc)
-- [866](cvc)
-- [784](cvc)
-- [382](cvc)
-- [737](cvc)
-- [243](cvc)
-- [285](cvc)
-- [538](cvc)
-- [330](cvc)
-- [759](cvc)
-- [296](cvc)
-- [153](cvc)
-- [875](cvc)
-- [807](cvc)
-- [259](cvc)
-- [901](cvc)
-- [938](cvc)
-- [689](cvc)
-- [771](cvc)
-- [367](cvc)
-- [225](cvc)
-- [651](cvc)
-- [618](cvc)
-- [562](cvc)
-- [850](cvc)
-- [488](cvc)
-- [773](cvc)
-- [228](cvc)
-- [310](cvc)
-- [698](cvc)
-- [527](cvc)
-- [451](cvc)
-- [400](cvc)
-- [244](cvc)
-- [350](cvc)
-- [693](cvc)
-- [564](cvc)
-- [970](cvc)
-- [837](cvc)
-- [395](cvc)
-- [809](cvc)
-- [632](cvc)
-- [599](cvc)
-- [855](cvc)
-- [114](cvc)
-- [933](cvc)
-- [373](cvc)
-- [876](cvc)
-- [842](cvc)
-- [611](cvc)
-- [498](cvc)
-- [742](cvc)
-- [815](cvc)
-- [893](cvc)
-- [214](cvc)
-- [213](cvc)
-- [179](cvc)
-- [174](cvc)
-- [898](cvc)
-- [405](cvc)
-- [326](cvc)
-- [747](cvc)
-- [441](cvc)
-- [966](cvc)
-- [735](cvc)
-- [135](cvc)
-- [621](cvc)
-- [514](cvc)
-- [504](cvc)
-- [278](cvc)
-- [421](cvc)
-- [447](cvc)
-- [226](cvc)
-- [879](cvc)
-- [121](cvc)
-- [892](cvc)
-- [397](cvc)
-- [459](cvc)
-- [112](cvc)
-- [574](cvc)
-- [222](cvc)
-- [110](cvc)
-
+## regex:mmaa
+- [0-9]{4}

@@ -32,11 +32,11 @@ templates:
   utter_happy:
   - text: "Se ha pagado el recibo!"
   utter_ask_referencia:
-  - text: "Entre el número de referencia del recibo-->"
+  - text: "Entre el número de referencia del recibo:"
   utter_ask_tarjeta:
-  - text: "Entre el número de la tarjeta bancaria-->"
+  - text: "Entre el número de la tarjeta bancaria:"
   utter_ask_cvv:
-  - text: "Entre el código de seguridad de la tarjeta bancaria-->"
+  - text: "Entre el código de seguridad de la tarjeta bancaria:"
   utter_ask_mmaa:
   - text: "Entre la fecha de caducidad-->"
   utter_wrong_cvv:

@@ -52,7 +52,7 @@ responses:
   - text: "Parámetro incorrecto!"
 
   utter_slots_values:
-  - text: "Usted va a pagar el recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"
+  - text: "Recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"
 
 
 session_config:

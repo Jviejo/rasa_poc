@@ -16,3 +16,23 @@
   - form{"name":"pagar_form"}
   - form{"name": null}
   - utter_slots_values
+
+## deviation 1
+* pagar
+  - pagar_form
+  - form{"name":"pagar_form"}
+* cancelar
+  - utter_continuar
+* confirmar
+  - pagar_form
+  - form{"name":null}
+  - utter_slots_values
+
+## deviation 2
+* pagar
+  - pagar_form
+  - form{"name":"pagar_form"}
+* cancelar
+  - utter_continuar
+* abandonar
+  - utter_abandonar

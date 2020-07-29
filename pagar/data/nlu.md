@@ -1,5 +1,10 @@
 ## intent:init
 - inicializar
+## intent:confirmar
+- si
+- ok
+## intent:abandonar
+- no
 
 ## intent:pagar
 - quiero pagar 
@@ -81,6 +86,7 @@
 - cancelo
 - quiero cancelar
 - cancela
+- cancelar
 
 ## regex:referencia
 - [0-9]{12}

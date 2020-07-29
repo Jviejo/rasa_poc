@@ -2,6 +2,8 @@ intents:
 - init
 - pagar
 - cancelar
+- confirmar
+- abandonar
 - inform_referencia
 - inform_tarjeta
 - inform_cvv
@@ -62,7 +64,12 @@ responses:
 
   utter_slots_values:
   - text: "Recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"
-
+  
+  utter_continuar:
+  - text: "¿Desea continuar?"
+  
+  utter_abandonar:
+  - text: "Operacion abortada!"
 
 session_config:
   session_expiration_time: 60

@@ -1,3 +1,7 @@
+## happy path 0
+* init
+  - utter_init
+
 ## happy path 1
 * pagar
   - pagar_form

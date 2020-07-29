@@ -1,3 +1,6 @@
+## intent:init
+- inicializar
+
 ## intent:pagar
 - quiero pagar 
 - quiero pagar recibo

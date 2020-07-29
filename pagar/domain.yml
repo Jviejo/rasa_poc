@@ -1,4 +1,5 @@
 intents:
+- init
 - pagar
 - cancelar
 - inform_referencia
@@ -33,6 +34,14 @@ forms:
 - pagar_form
   
 responses:
+  utter_init:
+  - text: "Comandos disponibles"
+    buttons:
+      - title: "Pagar"
+        payload: '/pagar'
+      - title: "Indefinido"
+        payload: '/pagar'
+
   utter_submit:
   - text: "Se ha pagado el recibo!"
 

@@ -36,3 +36,13 @@
   - utter_continuar
 * abandonar
   - utter_abandonar
+
+## deviation 3
+* pagar
+  - pagar_form
+  - form{"name":"pagar_form"}
+  - slot{"referencia":"123456789012"}
+* cancelar
+  - utter_continuar
+* abandonar
+  - utter_abandonar

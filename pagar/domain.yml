@@ -66,7 +66,7 @@ responses:
   - text: "Recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"
   
   utter_continuar:
-  - text: "¿Desea continuar?"
+  - text: "¿Estás seguro?"
   
   utter_abandonar:
   - text: "Operacion abortada!"

@@ -7,7 +7,7 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List, Union, Optional
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -20,6 +20,14 @@ class PagarForm(FormAction):
 
      def name(self) -> Text:
          return "pagar_form"
+     
+     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        return  {
+           "referencia": [self.from_entity(entity="referencia"), self.from_text()],
+           "tarjeta": [self.from_text()],
+           "cvv": [self.from_text()],
+           "mmaa": [self.from_text()]
+       }
 
      @staticmethod
      def required_slots(tracker: Tracker) -> List[Text]:

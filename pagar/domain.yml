@@ -59,8 +59,17 @@ responses:
   utter_ask_mmaa:
   - text: "Entre la fecha de caducidad-->"
 
-  utter_wrong:
-  - text: "Parámetro incorrecto!"
+  utter_wrong_referencia:
+  - text: "Referencia incorrecta!"
+
+  utter_wrong_tarjeta:
+  - text: "Tarjeta incorrecta!"
+
+  utter_wrong_cvv:
+  - text: "Código de seguridad incorrecto!"
+
+  utter_wrong_mmaa:
+  - text: "Fecha de caducidad incorrecta" 
 
   utter_slots_values:
   - text: "Recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"

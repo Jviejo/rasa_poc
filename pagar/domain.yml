@@ -8,7 +8,7 @@ intents:
 - inform_tarjeta
 - inform_cvv
 - inform_mmaa
-
+- bad_command
 
 entities:
 - referencia
@@ -19,16 +19,16 @@ entities:
 slots:
   referencia:
     type: unfeaturized
-    auto_fill: false
+    auto_fill: true
   tarjeta:
     type: unfeaturized
-    auto_fill: false
+    auto_fill: true
   cvv:
     type: unfeaturized
-    auto_fill: false
+    auto_fill: true
   mmaa:
     type: unfeaturized
-    auto_fill: false 
+    auto_fill: true 
   requested_slot:
     type: unfeaturized
 
@@ -45,7 +45,7 @@ responses:
         payload: '/pagar'
 
   utter_submit:
-  - text: "Se ha pagado el recibo!"
+  - text: "Se ha pagado el recibo! Referencia: {referencia} Tarjeta: {tarjeta} CVV: {cvv} y Caducidad: {mmaa}"
 
   utter_ask_referencia:
   - text: "Entre el número de referencia del recibo:"
@@ -71,8 +71,11 @@ responses:
   utter_wrong_mmaa:
   - text: "Fecha de caducidad incorrecta" 
 
+  utter_wrong:
+  - text: "Parámetro incorrecto {requested_slot}........"
+
   utter_slots_values:
-  - text: "Recibo con número de referencia {referencia} y tarjeta {tarjeta} con código {cvv} y caducidad {mmaa}"
+  - text: "Entre comando"
   
   utter_continuar:
   - text: "¿Estás seguro?"

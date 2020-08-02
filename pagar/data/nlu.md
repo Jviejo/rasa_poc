@@ -49,6 +49,13 @@
 - pagar recibo [987655443309](referencia) con tarjeta [9169903343701791](tarjeta) con código [865](cvv) y caducidad [1122](mmaa)
 - pagar recibo [987655443309](referencia) con tarjeta [6169903743701711](tarjeta) con código [815](cvv) y caducidad [0223](mmaa)
 
+## intent:bad_command
+
+- pagar recibo [123](cvv)
+- pagar recibo [123456789012](referencia) con tarjeta [123](cvv)
+- pagar recibo [1221](mmaa)
+- pagar recibo [123456789098](referencia) con tarjeta [1222](cvv)
+
 ## intent:inform_referencia
 - [121234547890](referencia)
 - [110223455770](referencia)

@@ -23,10 +23,10 @@ class PagarForm(FormAction):
      def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
 
        return {
-           "referencia": [self.from_entity(entity="referencia", intent=["inform_referencia","pagar"])],
+           "referencia": [self.from_entity(entity="referencia", intent=["inform_referencia", "pagar"])],
            "tarjeta": [self.from_entity(entity="tarjeta", intent=["inform_tarjeta", "pagar"])],
-           "cvv": [self.from_entity(entity="cvv", intent=["inform_cvv","pagar"])],
-           "mmaa": [self.from_entity(entity="mmaa", intent=["inform_mmaa","pagar"])],
+           "cvv": [self.from_entity(entity="cvv", intent=["inform_cvv", "pagar"])],
+           "mmaa": [self.from_entity(entity="mmaa", intent=["inform_mmaa", "mmaa"])],
        }
 
      @staticmethod
@@ -68,14 +68,14 @@ class PagarForm(FormAction):
              print("Validando referencia ...")
              print(slot_values)
              if slot_values["requested_slot"] == "referencia" or slot_values["requested_slot"] == None:
-                 return {"referencia": value}
+                 return {"referencia": value, "cvv": None, "mmaa": None}
              else:
                  dispatcher.utter_message(template="utter_wrong")
-                 return {"referencia": slot_values["referencia"]}
+                 return {"referencia": slot_values["referencia"], "cvv": None, "mmaa": None}
          else:
              dispatcher.utter_message(template="utter_wrong")
            
-             return {"referencia": None}
+             return {"referencia": None, "cvv": None, "mmaa": None}
 
      def validate_tarjeta(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
          if  (len(value) == 16):
@@ -83,13 +83,13 @@ class PagarForm(FormAction):
              print("Validando Tarjeta ...")
              print(slot_values)
              if  slot_values["requested_slot"] == "tarjeta" or slot_values["requested_slot"] == None:
-                 return {"tarjeta": value}
+                 return {"tarjeta": value, "cvv": None, "mmaa": None}
              else:
                  dispatcher.utter_message(template="utter_wrong")
-                 return {"tarjeta": slot_values["tarjeta"]}
+                 return {"tarjeta": slot_values["tarjeta"], "cvv": None, "mmaa": None}
          else:
              dispatcher.utter_message(template="utter_wrong")
-             return {"tarjeta": None}
+             return {"tarjeta": None, "cvv": None, "mmaa": None}
 
      @staticmethod
      def meses_db() -> List[Text]:

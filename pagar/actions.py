@@ -21,6 +21,7 @@ class PagarForm(FormAction):
          return "pagar_form"
      
      def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+
        return {
            "referencia": [self.from_entity(entity="referencia", intent=["inform_referencia","pagar"])],
            "tarjeta": [self.from_entity(entity="tarjeta", intent=["inform_tarjeta", "pagar"])],
@@ -33,12 +34,16 @@ class PagarForm(FormAction):
         return ["referencia", "tarjeta", "cvv", "mmaa"]
 
      def submit(self, dispatcher: CollectingDispatcher, tracker:Tracker, domain: Dict[Text, Any])->List[Dict]:
-        
-         dispatcher.utter_template('utter_submit', tracker)
+         print ("Enviando datos del formulario ....") 
+         slot_values= tracker.current_slot_values()
+         print(slot_values)       
+         #dispatcher.utter_template('utter_submit', tracker)
+         message= "Recibo pagado con referencia {}, tarjeta {}, código {} y fecha de caducidad {}".format(slot_values["referencia"], slot_values["tarjeta"], slot_values["cvv"], slot_values["mmaa"])
+         dispatcher.utter_message(text=message)
          return [AllSlotsReset()]
 
      def validate_cvv(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
-         print("Validado CVV")
+         print("Validando CVV ...")
          if (int(value) > 99 and int(value)<1000):
              # validation succeeded, set the value of the "cvv" slot to value
              #slot_values= self.extract_other_slots(dispatcher, tracker, domain)
@@ -49,7 +54,7 @@ class PagarForm(FormAction):
                 return {"cvv": value}
              else:
                 dispatcher.utter_message(template="utter_wrong")
-                return {"cvv": None}
+                return {"cvv": slot_values["cvv"]}
          else:
              dispatcher.utter_message(template="utter_wrong")
              # validation failed, set this slot to None, meaning the
@@ -57,11 +62,16 @@ class PagarForm(FormAction):
              return {"cvv": None}
 
      def validate_referencia(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
+
          if  (len(value) == 12):
              slot_values= tracker.current_slot_values()
-             print("Validada Referencia")
+             print("Validando referencia ...")
              print(slot_values)
-             return {"referencia": value}
+             if slot_values["requested_slot"] == "referencia" or slot_values["requested_slot"] == None:
+                 return {"referencia": value}
+             else:
+                 dispatcher.utter_message(template="utter_wrong")
+                 return {"referencia": slot_values["referencia"]}
          else:
              dispatcher.utter_message(template="utter_wrong")
            
@@ -70,13 +80,13 @@ class PagarForm(FormAction):
      def validate_tarjeta(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
          if  (len(value) == 16):
              slot_values= tracker.current_slot_values()
-             print("Validada Tarjeta")
+             print("Validando Tarjeta ...")
              print(slot_values)
              if  slot_values["requested_slot"] == "tarjeta" or slot_values["requested_slot"] == None:
                  return {"tarjeta": value}
              else:
                  dispatcher.utter_message(template="utter_wrong")
-                 return {"tarjeta": None}
+                 return {"tarjeta": slot_values["tarjeta"]}
          else:
              dispatcher.utter_message(template="utter_wrong")
              return {"tarjeta": None}
@@ -92,13 +102,14 @@ class PagarForm(FormAction):
      def validate_mmaa(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
          if  (len(value) == 4 and value[0:2] in self.meses_db() and value[2:4] in self.años_db()):
              slot_values= tracker.current_slot_values()
-             print("Validada fecha")
+             print("Validando fecha ...")
              print(slot_values)
              if slot_values["requested_slot"]=="mmaa" or slot_values["requested_slot"] == None:
+               print("Fecha aceptada")
                return {"mmaa": value}
              else: 
                dispatcher.utter_message(template="utter_wrong")
-               return {"mmaa": None}
+               return {"mmaa": slot_values["mmaa"]}
          else:
               dispatcher.utter_message(template="utter_wrong")
               return {"mmaa": None}

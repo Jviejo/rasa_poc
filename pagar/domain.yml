@@ -19,22 +19,22 @@ entities:
 slots:
   referencia:
     type: unfeaturized
-    auto_fill: true
+    auto_fill: false
   tarjeta:
     type: unfeaturized
-    auto_fill: true
+    auto_fill: false
   cvv:
     type: unfeaturized
-    auto_fill: true
+    auto_fill: false
   mmaa:
     type: unfeaturized
-    auto_fill: true 
+    auto_fill: false
   requested_slot:
     type: unfeaturized
 
 forms:
-- pagar_form
-  
+  - pagar_form
+
 responses:
   utter_init:
   - text: "Comandos disponibles"
@@ -45,7 +45,7 @@ responses:
         payload: '/pagar'
 
   utter_submit:
-  - text: "Se ha pagado el recibo! Referencia: {referencia} Tarjeta: {tarjeta} CVV: {cvv} y Caducidad: {mmaa}"
+  - text: "Se ha pagado el recibo! Referencia: {referencia} Tarjeta: {tarjeta} CVV: {cvv} y Fecha de Caducidad: {mmaa}"
 
   utter_ask_referencia:
   - text: "Entre el número de referencia del recibo:"
@@ -75,7 +75,7 @@ responses:
   - text: "Parámetro incorrecto {requested_slot}........"
 
   utter_slots_values:
-  - text: "Entre comando"
+  - text: "Entre nuevo comando"
   
   utter_continuar:
   - text: "¿Estás seguro?"

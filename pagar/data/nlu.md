@@ -51,10 +51,7 @@
 
 ## intent:bad_command
 
-- pagar recibo [123](cvv)
-- pagar recibo [123456789012](referencia) con tarjeta [123](cvv)
-- pagar recibo [1221](mmaa)
-- pagar recibo [123456789098](referencia) con tarjeta [1222](cvv)
+- pagar recibo x
 
 ## intent:inform_referencia
 - [121234547890](referencia)

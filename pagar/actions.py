@@ -21,7 +21,7 @@ class PagarForm(FormAction):
          return "pagar_form"
      
      def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-
+       print ("Slot mappings ....")
        return {
            "referencia": [self.from_entity(entity="referencia", intent=["inform_referencia", "pagar"])],
            "tarjeta": [self.from_entity(entity="tarjeta", intent=["inform_tarjeta", "pagar"])],

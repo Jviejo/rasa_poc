@@ -1,10 +1,14 @@
 ## intent:init
 - inicializar
-## intent:confirmar
+
+## intent:afirmar
 - si
 - ok
-## intent:abandonar
+- s
+
+## intent:negar
 - no
+- n
 
 ## intent:pagar
 - quiero pagar 

@@ -34,27 +34,20 @@
   - pagar_form
   - form{"name":"pagar_form"}
 * cancelar
-  - utter_continuar
-* confirmar
+  - utter_confirmar_cancelar
+* negar
   - pagar_form
-  - form{"name":null}
+  - form{"name": null}
   - utter_slots_values
 
-## deviation 2
+##deviation 2
 * pagar
   - pagar_form
-  - form{"name":"pagar_form"}
+  - form{"name": "pagar_form"}
 * cancelar
-  - utter_continuar
-* abandonar
+  - utter_confirmar_cancelar
+* afirmar
+  - action_deactivate_form
+  - form{"name": null}
   - utter_abandonar
 
-## deviation 3
-* pagar
-  - pagar_form
-  - form{"name":"pagar_form"}
-  - slot{"referencia":"123456789012"}
-* cancelar
-  - utter_continuar
-* abandonar
-  - utter_abandonar

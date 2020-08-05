@@ -11,17 +11,31 @@ from typing import Any, Text, Dict, List, Union, Optional
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import AllSlotsReset
+from rasa_sdk.events import AllSlotsReset, EventType
 from rasa_sdk.events import UserUtteranceReverted
 from rasa_sdk.forms import FormAction
+from rasa_sdk.events import SlotSet
 
 class PagarForm(FormAction):
 
      def name(self) -> Text:
          return "pagar_form"
-     
+      
+     def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
+        for slot in self.required_slots(tracker):
+            if self._should_request_slot(tracker, slot):
+                #logger.debug(f"Request next slot '{slot}'")
+                message= tracker.latest_message.get('text')
+                if message == 'cancelar':
+                   self.deactivate()
+                   return [AllSlotsReset()]
+                dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
+                value= tracker.get_slot(slot)
+                return [SlotSet(slot, value)]
+        return None
+        
      def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-       print ("Slot mappings ....")
+      
        return {
            "referencia": [self.from_entity(entity="referencia", intent=["inform_referencia", "pagar"])],
            "tarjeta": [self.from_entity(entity="tarjeta", intent=["inform_tarjeta", "pagar"])],
@@ -31,6 +45,7 @@ class PagarForm(FormAction):
 
      @staticmethod
      def required_slots(tracker: Tracker) -> List[Text]:
+  
         return ["referencia", "tarjeta", "cvv", "mmaa"]
 
      def submit(self, dispatcher: CollectingDispatcher, tracker:Tracker, domain: Dict[Text, Any])->List[Dict]:
@@ -62,7 +77,7 @@ class PagarForm(FormAction):
              return {"cvv": None}
 
      def validate_referencia(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
-
+         
          if  (len(value) == 12):
              slot_values= tracker.current_slot_values()
              print("Validando referencia ...")

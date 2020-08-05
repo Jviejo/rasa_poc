@@ -33,6 +33,7 @@
 * pagar
   - pagar_form
   - form{"name":"pagar_form"}
+  - slot{"requested_slot":"referencia"}
 * cancelar
   - utter_confirmar_cancelar
 * negar
@@ -40,7 +41,7 @@
   - form{"name": null}
   - utter_slots_values
 
-##deviation 2
+## deviation 2
 * pagar
   - pagar_form
   - form{"name": "pagar_form"}

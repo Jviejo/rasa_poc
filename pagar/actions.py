@@ -7,6 +7,9 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
+import logging
+from rasa_sdk.interfaces import Action, ActionExecutionRejection
+
 from typing import Any, Text, Dict, List, Union, Optional
 
 from rasa_sdk import Action, Tracker
@@ -15,24 +18,37 @@ from rasa_sdk.events import AllSlotsReset, EventType
 from rasa_sdk.events import UserUtteranceReverted
 from rasa_sdk.forms import FormAction
 from rasa_sdk.events import SlotSet
+from rasa.core.events import Event
+from rasa.core.domain import Domain
+from rasa.core.channels import OutputChannel
+from rasa.core.nlg import NaturalLanguageGenerator
+
+#This slot is used to store information needed to do the form handling
+REQUESTED_SLOT= "requested_slot"
+logger = logging.getLogger(__name__)
 
 class PagarForm(FormAction):
 
      def name(self) -> Text:
          return "pagar_form"
-      
-     def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
-        for slot in self.required_slots(tracker):
-            if self._should_request_slot(tracker, slot):
+     
+
+
+     #def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
+       
+     #   print("REQUEST NEXT SLOT")
+     #   print(tracker.get_slot(REQUESTED_SLOT))
+
+     #   for slot in self.required_slots(tracker):
+     #       #print(slot)
+     #       if self._should_request_slot(tracker, slot):
                 #logger.debug(f"Request next slot '{slot}'")
-                message= tracker.latest_message.get('text')
-                if message == 'cancelar':
-                   self.deactivate()
-                   return [AllSlotsReset()]
-                dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
-                value= tracker.get_slot(slot)
-                return [SlotSet(slot, value)]
-        return None
+      #          message= tracker.latest_message.get('text')
+      #          if message == 'cancelar':    
+      #             return self.deactivate()
+      #          dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
+      #          return [SlotSet(REQUESTED_SLOT, slot)]
+      #  return None
         
      def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
       
@@ -69,6 +85,7 @@ class PagarForm(FormAction):
                 return {"cvv": value}
              else:
                 dispatcher.utter_message(template="utter_wrong")
+                print("valor actual de CVV: ", {slot_values["cvv"]})
                 return {"cvv": slot_values["cvv"]}
          else:
              dispatcher.utter_message(template="utter_wrong")

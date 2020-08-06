@@ -56,7 +56,7 @@ class PagarForm(FormAction):
            "referencia": [self.from_entity(entity="referencia", intent=["inform_referencia", "pagar"])],
            "tarjeta": [self.from_entity(entity="tarjeta", intent=["inform_tarjeta", "pagar"])],
            "cvv": [self.from_entity(entity="cvv", intent=["inform_cvv", "pagar"])],
-           "mmaa": [self.from_entity(entity="mmaa", intent=["inform_mmaa", "mmaa"])],
+           "mmaa": [self.from_entity(entity="mmaa", intent=["inform_mmaa", "pagar"])],
        }
 
      @staticmethod
@@ -132,9 +132,10 @@ class PagarForm(FormAction):
         return ["20", "21", "22", "23", "24", "25"]
 
      def validate_mmaa(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
+            
+         print("Validando fecha ...")
          if  (len(value) == 4 and value[0:2] in self.meses_db() and value[2:4] in self.años_db()):
              slot_values= tracker.current_slot_values()
-             print("Validando fecha ...")
              print(slot_values)
              if slot_values["requested_slot"]=="mmaa" or slot_values["requested_slot"] == None:
                print("Fecha aceptada")

@@ -52,7 +52,6 @@
 - pagar recibo [987655443309](referencia) con tarjeta [9169903243701715](tarjeta) con código [165](cvv) y caducidad [0222](mmaa)
 - pagar recibo [987655443309](referencia) con tarjeta [9169903343701791](tarjeta) con código [865](cvv) y caducidad [1122](mmaa)
 - pagar recibo [987655443309](referencia) con tarjeta [6169903743701711](tarjeta) con código [815](cvv) y caducidad [0223](mmaa)
-
 - pagar recibo [987655443300](referencia) con tarjeta [5169903343701719](tarjeta) con código [739](cvv) y fecha [1022](mmaa)
 - pagar recibo [987655443309](referencia) con tarjeta [4169903300701790](tarjeta) con código [404](cvv) y fecha [0324](mmaa)
 - pagar recibo [987655443309](referencia) con tarjeta [8169903243701795](tarjeta) con código [865](cvv) y fecha [1225](mmaa)

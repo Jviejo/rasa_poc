@@ -31,7 +31,7 @@ slots:
     auto_fill: false
   requested_slot:
     type: unfeaturized
-    auto_fill: True
+    
 
 forms:
   - pagar_form

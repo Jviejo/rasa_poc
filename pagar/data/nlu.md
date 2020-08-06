@@ -53,6 +53,17 @@
 - pagar recibo [987655443309](referencia) con tarjeta [9169903343701791](tarjeta) con código [865](cvv) y caducidad [1122](mmaa)
 - pagar recibo [987655443309](referencia) con tarjeta [6169903743701711](tarjeta) con código [815](cvv) y caducidad [0223](mmaa)
 
+- pagar recibo [987655443300](referencia) con tarjeta [5169903343701719](tarjeta) con código [739](cvv) y fecha [1022](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [4169903300701790](tarjeta) con código [404](cvv) y fecha [0324](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [8169903243701795](tarjeta) con código [865](cvv) y fecha [1225](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [9188903343701795](tarjeta) con código [111](cvv) y fecha [1122](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [7169907343701795](tarjeta) con código [861](cvv) y fecha [0220](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [0169903343701715](tarjeta) con código [861](cvv) y fecha de caducidad [1222](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [1169903343701795](tarjeta) con código [865](cvv) y fecha de caducidad [0122](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [9169903243701715](tarjeta) con código [165](cvv) y fecha de caducidad [1224](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [9169903343701791](tarjeta) con código [865](cvv) y fecha de caducidad [0124](mmaa)
+- pagar recibo [987655443309](referencia) con tarjeta [6169903743701711](tarjeta) con código [815](cvv) y fecha de caducidad [1125](mmaa)
+
 ## intent:bad_command
 
 - pagar recibo x

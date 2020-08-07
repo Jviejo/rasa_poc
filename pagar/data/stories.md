@@ -33,7 +33,6 @@
 * pagar
   - pagar_form
   - form{"name":"pagar_form"}
-  - slot{"requested_slot":"referencia"}
 * cancelar
   - utter_confirmar_cancelar
 * negar
@@ -41,10 +40,60 @@
   - form{"name": null}
   - utter_slots_values
 
-## deviation 2
+## deviation 1.1
 * pagar
   - pagar_form
   - form{"name": "pagar_form"}
+* cancelar
+  - utter_confirmar_cancelar
+* afirmar
+  - action_deactivate_form
+  - form{"name": null}
+  - utter_abandonar
+
+## deviation 2
+* pagar
+  - pagar_form
+  - form{"name":"pagar_form"}
+  - slot{"referencia": "123456789012"}
+* cancelar
+  - utter_confirmar_cancelar
+* negar
+  - pagar_form
+  - form{"name": null}
+  - utter_slots_values
+
+## deviation 2.1
+* pagar
+  - pagar_form
+  - form{"name": "pagar_form"}
+  - slot{"referencia":"123456789012"}
+* cancelar
+  - utter_confirmar_cancelar
+* afirmar
+  - action_deactivate_form
+  - form{"name": null}
+  - utter_abandonar
+
+## deviation 3
+* pagar
+  - pagar_form
+  - form{"name":"pagar_form"}
+  - slot{"referencia": "123456789012"}
+  - slot{"tarjeta": "1234567890123456"}
+* cancelar
+  - utter_confirmar_cancelar
+* negar
+  - pagar_form
+  - form{"name": null}
+  - utter_slots_values
+
+## deviation 3.1
+* pagar
+  - pagar_form
+  - form{"name": "pagar_form"}
+  - slot{"referencia": "123456789012"}
+  - slot{"tarjeta": "1234567890123456"}
 * cancelar
   - utter_confirmar_cancelar
 * afirmar

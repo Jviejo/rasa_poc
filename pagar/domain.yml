@@ -29,6 +29,7 @@ slots:
   mmaa:
     type: unfeaturized
     auto_fill: false
+    
   requested_slot:
     type: unfeaturized
     

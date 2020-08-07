@@ -82,6 +82,7 @@
 - [505123856900](referencia)
 - [100124456700](referencia)
 
+
 ## intent:inform_tarjeta
 - [7169903343701795](tarjeta)
 - [5765577253352966](tarjeta)
@@ -96,6 +97,7 @@
 - [8765070233052996](tarjeta)
 - [8767477233752986](tarjeta)
 - [9765478236352966](tarjeta)
+
 
 ## intent:inform_cvv
 - [185](cvv)

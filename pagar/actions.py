@@ -32,23 +32,72 @@ class PagarForm(FormAction):
      def name(self) -> Text:
          return "pagar_form"
      
+     def validate1(self, dispatcher, tracker, domain):
+        slot_values= self.extract_other_slots(dispatcher, tracker, domain)
+        slot_to_fill= tracker.get_slot(REQUESTED_SLOT)
+        if slot_to_fill:
+           slot_values.update(self.extract_requested_slot(dispatcher, tracker, domain))
+
+           #for slot, value in self.extract_requested_slot(dispatcher, tracker, domain).items():
+           #   validate_func= getattr(self, "validate_{}".format(slot), lambda *x:value)
+           #   slot_values[slot]= validate_func(value, dispatcher, tracker, domain)
+           if not slot_values:
+                  print("No slotssssss")
+                  #return[AllSlotsReset()]
+     #           raise ActionExecutionRejection(self.name(), "Failed to validate slot {0}" "with action {1}".format(slot_to_fill, self.name()))
+        # validation succedd, set slots to extracted values
+        return [SlotSet(slot, value) for slot, value in slot_values.items()]
 
 
-     #def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
+     async def validate(
+          self,
+          dispatcher: "CollectingDispatcher",
+          tracker: "Tracker",
+          domain: Dict[Text, Any],
+          ) -> List[EventType]:
+        """Extract and validate value of requested slot.
+
+        If nothing was extracted reject execution of the form action.
+        Subclass this method to add custom validation and rejection logic
+        """
+
+        # extract other slots that were not requested
+        # but set by corresponding entity or trigger intent mapping
+        slot_values = self.extract_other_slots(dispatcher, tracker, domain)
+
+        # extract requested slot
+        slot_to_fill = tracker.get_slot(REQUESTED_SLOT)
+        if slot_to_fill:
+            slot_values.update(self.extract_requested_slot(dispatcher, tracker, domain))
+
+            #if not slot_values:
+                # reject to execute the form action
+                # if some slot was requested but nothing was extracted
+                # it will allow other policies to predict another action
+                #raise ActionExecutionRejection(
+                #    self.name(),
+                #    f"OTOTOTOTOTOFailed to extract slot {slot_to_fill} with action {self.name()}",
+                #)
+        logger.debug(f"Validating extracted slots: {slot_values}")
+        return await self.validate_slots(slot_values, dispatcher, tracker, domain)
+
+
+     def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
        
-     #   print("REQUEST NEXT SLOT")
-     #   print(tracker.get_slot(REQUESTED_SLOT))
-
-     #   for slot in self.required_slots(tracker):
-     #       #print(slot)
-     #       if self._should_request_slot(tracker, slot):
+        print("REQUEST NEXT SLOT")
+        print(self.required_slots(tracker))
+        for slot in self.required_slots(tracker):
+            if self._should_request_slot(tracker, slot):
+                print(slot)
                 #logger.debug(f"Request next slot '{slot}'")
-      #          message= tracker.latest_message.get('text')
-      #          if message == 'cancelar':    
-      #             return self.deactivate()
-      #          dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
-      #          return [SlotSet(REQUESTED_SLOT, slot)]
-      #  return None
+                message= tracker.latest_message.get('text')
+                if message == "cancelar":
+                   print("Reseteando todos los slots")
+                   #self.deactivate()
+                   return None
+                dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
+                return [SlotSet(REQUESTED_SLOT, slot)]
+        return None
         
      def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
       
@@ -57,6 +106,7 @@ class PagarForm(FormAction):
            "tarjeta": [self.from_entity(entity="tarjeta", intent=["inform_tarjeta", "pagar"])],
            "cvv": [self.from_entity(entity="cvv", intent=["inform_cvv", "pagar"])],
            "mmaa": [self.from_entity(entity="mmaa", intent=["inform_mmaa", "pagar"])],
+           
        }
 
      @staticmethod
@@ -69,10 +119,12 @@ class PagarForm(FormAction):
          slot_values= tracker.current_slot_values()
          print(slot_values)       
          #dispatcher.utter_template('utter_submit', tracker)
-         message= "Recibo pagado con referencia {}, tarjeta {}, código {} y fecha de caducidad {}".format(slot_values["referencia"], slot_values["tarjeta"], slot_values["cvv"], slot_values["mmaa"])
-         dispatcher.utter_message(text=message)
+         if slot_values["referencia"] and slot_values["tarjeta"] and slot_values["cvv"] and slot_values["mmaa"]:
+              message= "Recibo pagado con referencia {}, tarjeta {}, código {} y fecha de caducidad {}".format(slot_values["referencia"], slot_values["tarjeta"], slot_values["cvv"], slot_values["mmaa"])
+              dispatcher.utter_message(text=message)
          return [AllSlotsReset()]
 
+         
      def validate_cvv(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
          print("Validando CVV ...")
          if (int(value) > 99 and int(value)<1000):
@@ -94,10 +146,11 @@ class PagarForm(FormAction):
              return {"cvv": None}
 
      def validate_referencia(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
-         
+                      
+         slot_values= tracker.current_slot_values()
+         print("Validando referencia ...")
+
          if  (len(value) == 12):
-             slot_values= tracker.current_slot_values()
-             print("Validando referencia ...")
              print(slot_values)
              if slot_values["requested_slot"] == "referencia" or slot_values["requested_slot"] == None:
                  return {"referencia": value, "cvv": None, "mmaa": None}
@@ -105,9 +158,11 @@ class PagarForm(FormAction):
                  dispatcher.utter_message(template="utter_wrong")
                  return {"referencia": slot_values["referencia"], "cvv": None, "mmaa": None}
          else:
-             dispatcher.utter_message(template="utter_wrong")
-           
-             return {"referencia": None, "cvv": None, "mmaa": None}
+             if  slot_values["requested_slot"] == None:
+                dispatcher.utter_message(text="Parámetro incorrecto en la secuencia")
+             else:
+                dispatcher.utter_message(template="utter_wrong")
+             return {"referencia": slot_values["referencia"], "tarjeta": slot_values["tarjeta"], "cvv": slot_values["cvv"], "mmaa": slot_values["mmaa"]}
 
      def validate_tarjeta(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
          if  (len(value) == 16):

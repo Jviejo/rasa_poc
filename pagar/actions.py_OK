@@ -64,12 +64,10 @@ class PagarForm(FormAction):
                 print(slot)
                 #logger.debug(f"Request next slot '{slot}'")
                 message= tracker.latest_message.get('text')
-                intent= tracker.latest_message.get('intent')['name']
-                if intent == "cancelar":
+                if message == "cancelar":
                    print("Reseteando todos los slots")
                    #self.deactivate()
                    return None
-                   #return  self.deactivate()
                 dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
                 return [SlotSet(REQUESTED_SLOT, slot)]
         return None
@@ -97,8 +95,6 @@ class PagarForm(FormAction):
          if slot_values["referencia"] and slot_values["tarjeta"] and slot_values["cvv"] and slot_values["mmaa"]:
               message= "Recibo pagado con referencia {}, tarjeta {}, código {} y fecha de caducidad {}".format(slot_values["referencia"], slot_values["tarjeta"], slot_values["cvv"], slot_values["mmaa"])
               dispatcher.utter_message(text=message)
-         #else: 
-         #     dispatcher.utter_message(text="¿Está seguro que desea cancerlar S/N?")
          return [AllSlotsReset()]
 
          

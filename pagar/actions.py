@@ -32,23 +32,6 @@ class PagarForm(FormAction):
      def name(self) -> Text:
          return "pagar_form"
      
-     def validate1(self, dispatcher, tracker, domain):
-        slot_values= self.extract_other_slots(dispatcher, tracker, domain)
-        slot_to_fill= tracker.get_slot(REQUESTED_SLOT)
-        if slot_to_fill:
-           slot_values.update(self.extract_requested_slot(dispatcher, tracker, domain))
-
-           #for slot, value in self.extract_requested_slot(dispatcher, tracker, domain).items():
-           #   validate_func= getattr(self, "validate_{}".format(slot), lambda *x:value)
-           #   slot_values[slot]= validate_func(value, dispatcher, tracker, domain)
-           if not slot_values:
-                  print("No slotssssss")
-                  #return[AllSlotsReset()]
-     #           raise ActionExecutionRejection(self.name(), "Failed to validate slot {0}" "with action {1}".format(slot_to_fill, self.name()))
-        # validation succedd, set slots to extracted values
-        return [SlotSet(slot, value) for slot, value in slot_values.items()]
-
-
      async def validate(
           self,
           dispatcher: "CollectingDispatcher",
@@ -69,22 +52,12 @@ class PagarForm(FormAction):
         slot_to_fill = tracker.get_slot(REQUESTED_SLOT)
         if slot_to_fill:
             slot_values.update(self.extract_requested_slot(dispatcher, tracker, domain))
-
-            #if not slot_values:
-                # reject to execute the form action
-                # if some slot was requested but nothing was extracted
-                # it will allow other policies to predict another action
-                #raise ActionExecutionRejection(
-                #    self.name(),
-                #    f"OTOTOTOTOTOFailed to extract slot {slot_to_fill} with action {self.name()}",
-                #)
         logger.debug(f"Validating extracted slots: {slot_values}")
         return await self.validate_slots(slot_values, dispatcher, tracker, domain)
 
 
      def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
        
-        print("REQUEST NEXT SLOT")
         print(self.required_slots(tracker))
         for slot in self.required_slots(tracker):
             if self._should_request_slot(tracker, slot):

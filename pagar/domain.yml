@@ -38,6 +38,7 @@ forms:
   - pagar_form
 
 responses:
+  
   utter_init:
   - text: "Comandos disponibles"
     buttons:
@@ -84,6 +85,9 @@ responses:
   
   utter_abandonar:
   - text: "Operacion cancelada"
+
+actions:
+  - action_cancelar
 
 session_config:
   session_expiration_time: 60

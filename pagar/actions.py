@@ -22,10 +22,25 @@ from rasa.core.events import Event
 from rasa.core.domain import Domain
 from rasa.core.channels import OutputChannel
 from rasa.core.nlg import NaturalLanguageGenerator
+from rasa_sdk.events import FollowupAction
 
 #This slot is used to store information needed to do the form handling
 REQUESTED_SLOT= "requested_slot"
 logger = logging.getLogger(__name__)
+
+class ActionCancelar(Action):
+   def name(self) -> Text:
+      return "action_cancelar"
+
+   def run(self,
+           dispatcher: CollectingDispatcher,
+           tracker: Tracker,
+           domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        print("Ejecutandose acción cancelar.......")
+        slots= tracker.current_slot_values()
+        print(slots)
+        dispatcher.utter_message(template="utter_confirmar_cancelar")
+        #dispatcher.utter_message(text= "Seguro?")
 
 class PagarForm(FormAction):
 
@@ -58,18 +73,21 @@ class PagarForm(FormAction):
 
      def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
        
-        print(self.required_slots(tracker))
-        for slot in self.required_slots(tracker):
+        last_intent= tracker.latest_message.get('intent')['name']
+        if last_intent == 'afirmar':
+           dispatcher.utter_message(template= 'utter_abandonar')
+           return [self.deactivate(), AllSlotsReset()]          
+
+        for slot in self.required_slots(tracker): 
             if self._should_request_slot(tracker, slot):
-                print(slot)
+                print(f"Request next slot '{slot}'")
                 #logger.debug(f"Request next slot '{slot}'")
                 message= tracker.latest_message.get('text')
                 intent= tracker.latest_message.get('intent')['name']
                 if intent == "cancelar":
-                   print("Reseteando todos los slots")
                    #self.deactivate()
-                   return None
-                   #return  self.deactivate()
+                   return  None
+
                 dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
                 return [SlotSet(REQUESTED_SLOT, slot)]
         return None
@@ -85,20 +103,19 @@ class PagarForm(FormAction):
        }
 
      @staticmethod
-     def required_slots(tracker: Tracker) -> List[Text]:
-  
+     def required_slots(tracker: Tracker) -> List[Text]:  
         return ["referencia", "tarjeta", "cvv", "mmaa"]
 
      def submit(self, dispatcher: CollectingDispatcher, tracker:Tracker, domain: Dict[Text, Any])->List[Dict]:
-         print ("Enviando datos del formulario ....") 
          slot_values= tracker.current_slot_values()
          print(slot_values)       
          #dispatcher.utter_template('utter_submit', tracker)
          if slot_values["referencia"] and slot_values["tarjeta"] and slot_values["cvv"] and slot_values["mmaa"]:
               message= "Recibo pagado con referencia {}, tarjeta {}, código {} y fecha de caducidad {}".format(slot_values["referencia"], slot_values["tarjeta"], slot_values["cvv"], slot_values["mmaa"])
               dispatcher.utter_message(text=message)
-         #else: 
-         #     dispatcher.utter_message(text="¿Está seguro que desea cancerlar S/N?")
+         else:
+              #return [FollowupAction("action_cancelar")] 
+              return [FollowupAction("action_cancelar")]
          return [AllSlotsReset()]
 
          

@@ -1,32 +1,47 @@
-## happy path 0
-* init
-  - utter_init
 
 ## happy path 1
 * pagar
   - pagar_form
   - form{"name": "pagar_form"}
   - form{"name": null}
-  - utter_slots_values
+  - action_chat_restart
 
 ## happy path 2
-* pagar{"referencia":"012345678912"}
-  - slot{"referencia":"012345678912"}
+* pagar
   - pagar_form
-  - form{"name":"pagar_form"}
+  - form{"name": "pagar_form"}
+  - slot{"referencia": "123456789012"}
   - form{"name": null}
-  - utter_slots_values
+  - action_chat_restart
 
-## happy path 2.1
-* pagar{"referencia": "012345678912", "tarjeta":"1234123412341234", "cvv":"123", "mmaa":"1223"}
-  - slot{"referencia": "012345678912"}
-  - slot{"tarjeta": "1234123412341234"}
-  - slot{"cvv":"123"}
-  - slot{"mmaa":"1223"}
+## happy path 3
+* pagar
   - pagar_form
-  - form{"name":"pagar_form"}
+  - form{"name": "pagar_form"}
+  - slot{"referencia": "123456789012"}
+  - slot{"tarjeta": "1234123412341234"}
   - form{"name": null}
-  - utter_slots_values
-  
+  - action_chat_restart
+
+## happy path 4
+* pagar
+  - pagar_form
+  - form{"name": "pagar_form"}
+  - slot{"referencia": "123456789012"}
+  - slot{"tarjeta": "1234123412341234"}
+  - slot{"cvv": "123"}
+  - form{"name": null}
+  - action_chat_restart
+
+## happy path 5
+* pagar
+  - pagar_form
+  - form{"name": "pagar_form"}
+  - slot{"referencia": "123456789012"}
+  - slot{"tarjeta": "1234123412341234"}
+  - slot{"cvv": "123"}
+  - slot{"mmaa": "1121"}
+  - form{"name": null}
+  - action_chat_restart
 
 

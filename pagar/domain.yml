@@ -77,17 +77,17 @@ responses:
   utter_wrong:
   - text: "Parámetro incorrecto {requested_slot}........"
 
-  utter_slots_values:
-  - text: "Entre nuevo comando"
+  utter_inicializar:
+  - text: "Entre nuevo comando >>"
   
   utter_confirmar_cancelar:
   - text: "¿Estás seguro que desea cancelar?"
   
-  utter_abandonar:
-  - text: "Operacion cancelada"
+  utter_cancelar:
+  - text: "Ha cancelado la operación"  
 
 actions:
-  - action_cancelar
+  - action_chat_restart
 
 session_config:
   session_expiration_time: 60

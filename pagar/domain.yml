@@ -2,8 +2,8 @@ intents:
 - init
 - pagar
 - cancelar
-- afirmar
-- negar
+- confirmar_cancelar
+- negar_cancelar
 - inform_referencia
 - inform_tarjeta
 - inform_cvv
@@ -88,6 +88,7 @@ responses:
 
 actions:
   - action_chat_restart
+  - action_ask_confirmation
 
 session_config:
   session_expiration_time: 60

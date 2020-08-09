@@ -29,6 +29,12 @@ from rasa_sdk.events import Restarted
 REQUESTED_SLOT= "requested_slot"
 logger = logging.getLogger(__name__)
 
+class ActionAskConfirmation(Action):
+   def name(self)->Text:
+      return "action_ask_confirmation"
+   def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+      dispatcher.utter_message(text= "Action: ¿Está seguro de cancelar?")
+
 class ActionRestarted(Action):
    def name(self) -> Text:
       return "action_chat_restart"
@@ -72,18 +78,23 @@ class PagarForm(FormAction):
      def request_next_slot(self, dispatcher:"CollectingDispatcher", tracker: "Tracker", domain: Dict[Text, Any],  )->Optional[List[EventType]]:
        
         last_intent= tracker.latest_message.get('intent')['name']
+        print(last_intent)
+        if last_intent == 'cancelar':
+            return None
         if last_intent == 'confirmar_cancelar':
-          print("Se confirma la cancelación")
-          return self.deactivate()        
+            #return [self.deactivate(), FollowupAction('action_chat_restart')]
+            return None
         
         for slot in self.required_slots(tracker): 
             if self._should_request_slot(tracker, slot):
-                print(f"Request next slot '{slot}'")
+                #print(f"Request next slot '{slot}'")
                 #logger.debug(f"Request next slot '{slot}'")
-                message= tracker.latest_message.get('text')
-                intent= tracker.latest_message.get('intent')['name']
-                if intent == "cancelar":
-                   return  self.deactivate()
+                #message= tracker.latest_message.get('text')
+                #intent= tracker.latest_message.get('intent')['name']
+                #if intent == "cancelar":
+                   #dispatcher.utter_message(text= "¿Está seguro de la cancelación?")
+                   #return  self.deactivate()
+                #   return None
 
                 dispatcher.utter_message(template=f"utter_ask_{slot}", **tracker.slots)
                 return [SlotSet(REQUESTED_SLOT, slot)]
@@ -105,14 +116,17 @@ class PagarForm(FormAction):
 
      def submit(self, dispatcher: CollectingDispatcher, tracker:Tracker, domain: Dict[Text, Any])->List[Dict]:
          slot_values= tracker.current_slot_values()
-         
          if slot_values["referencia"] and slot_values["tarjeta"] and slot_values["cvv"] and slot_values["mmaa"]:
               message= "Submit: Recibo pagado con referencia {}, tarjeta {}, código {} y fecha de caducidad {}".format(slot_values["referencia"], slot_values["tarjeta"], slot_values["cvv"], slot_values["mmaa"])
+              dispatcher.utter_message(text= message)
+              ##return [AllSlotsReset()]
+              return [FollowupAction('action_chat_restart')]
          else:
-              message= "Submit: ¿Está seguro que abandona la operación?"
-
-         dispatcher.utter_message(text=message) 
-         return [AllSlotsReset()]
+              if (tracker.latest_message.get('intent')['name'] == "confirmar_cancelar"):
+                 return [FollowupAction('action_chat_restart')]
+              #if (tracker.latest_message.get('intent')['name'] == "cancelar")
+              return [FollowupAction('action_ask_confirmation')]
+         
 
          
      def validate_cvv(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any] ) -> Dict[Text, Any]:
@@ -139,7 +153,7 @@ class PagarForm(FormAction):
                       
          slot_values= tracker.current_slot_values()
          print("Validando referencia ...")
-
+        
          if  (len(value) == 12):
              print(slot_values)
              if slot_values["requested_slot"] == "referencia" or slot_values["requested_slot"] == None:

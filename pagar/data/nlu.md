@@ -7,7 +7,7 @@
 - s
 - positivo
 
-## intent:negar
+## intent:negar_cancelar
 - no
 - n
 - negativo

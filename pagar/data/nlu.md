@@ -1,5 +1,6 @@
 ## intent:init
-- inicializar
+- hola
+
 
 ## intent:confirmar_cancelar
 - si

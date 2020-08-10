@@ -24,10 +24,19 @@ from rasa.core.channels import OutputChannel
 from rasa.core.nlg import NaturalLanguageGenerator
 from rasa_sdk.events import FollowupAction
 from rasa_sdk.events import Restarted
+#from rasa_sdk.events import SessionStarted, ActionExecuted
 
 #This slot is used to store information needed to do the form handling
 REQUESTED_SLOT= "requested_slot"
 logger = logging.getLogger(__name__)
+
+#class ActionSessionStart(Action):
+#   def name(self) -> Text:
+#      return "action_session_start"
+#   async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any],) -> List[EventType]:
+#      events= [SessionStarted()]
+#      events.append(ActionExecuted("action_listen"))
+#      return events
 
 class ActionAskConfirmation(Action):
    def name(self)->Text:
@@ -43,7 +52,8 @@ class ActionRestarted(Action):
            dispatcher: CollectingDispatcher,
            tracker: Tracker,
            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(text= "Action_Restart: Entre nuevo comando")
+        #dispatcher.utter_message(text= "Action_Restart: Entre nuevo comando")
+        dispatcher.utter_message(template= "utter_init")
         return [Restarted()]
 
 class PagarForm(FormAction):

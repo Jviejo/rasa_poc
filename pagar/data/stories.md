@@ -1,3 +1,7 @@
+## happy path *
+* init
+  - utter_init
+
 
 ## happy path 1
 * pagar{"referencia":"111111111111", "tarjeta":"1234123412341234", "cvv":"123", "mmaa":"1121"}
